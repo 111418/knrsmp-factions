@@ -54,6 +54,9 @@ public class Faction {
     @Field("Invites")
     public ArrayList<UUID> invites = new ArrayList<>();
 
+    @Field("AllowTNT")
+    private boolean allowTNT;
+
     @Field("Relationships")
     private ArrayList<Relationship> relationships = new ArrayList<>();
 
@@ -136,6 +139,10 @@ public class Faction {
         return safe;
     }
 
+    public boolean isAllowTNT() {
+        return allowTNT;
+    }
+
     public DefaultedList<ItemStack> clearSafe() {
         DefaultedList<ItemStack> stacks = this.safe.stacks;
         this.safe = new SimpleInventory(54);
@@ -148,6 +155,11 @@ public class Faction {
 
     public void setName(String name) {
         this.name = name;
+        FactionEvents.MODIFY.invoker().onModify(this);
+    }
+
+    public void setAllowTNT(boolean allowTNT) {
+        this.allowTNT = allowTNT;
         FactionEvents.MODIFY.invoker().onModify(this);
     }
 

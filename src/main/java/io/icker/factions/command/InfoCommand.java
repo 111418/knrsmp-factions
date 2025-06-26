@@ -95,6 +95,8 @@ public class InfoCommand implements Command {
             .add(Formatting.GREEN.toString() + faction.getPower() + slash() + requiredPower + slash() + maxPower)
             .hover("Current / Required / Max")
             .send(player, false);
+        new Message(Formatting.GOLD + "AllowTNT: " + (faction.isAllowTNT() ? Formatting.GREEN + "Yes" : Formatting.RED + "No"))
+            .send(player, false);
         new Message(Formatting.GREEN + "Allies (" + Formatting.WHITE + faction.getMutualAllies().size() + Formatting.GREEN + "): ")
             .add(mutualAllies)
             .send(player, false);
