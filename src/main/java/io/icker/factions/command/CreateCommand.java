@@ -5,6 +5,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import io.icker.factions.FactionsMod;
+import io.icker.factions.api.events.FactionEvents;
 import io.icker.factions.api.persistents.Faction;
 import io.icker.factions.api.persistents.User;
 import io.icker.factions.util.Command;
@@ -41,7 +42,7 @@ public class CreateCommand implements Command {
         Faction faction = new Faction(name, "No description set", "No faction MOTD set", Formatting.WHITE, false, FactionsMod.CONFIG.POWER.BASE + FactionsMod.CONFIG.POWER.MEMBER);
         Faction.add(faction);
         Command.getUser(player).joinFaction(faction.getID(), User.Rank.OWNER);
-
+        FactionEvents.CREATE.invoker().onCreate(faction, Command.getUser(player));
         source.getServer().getPlayerManager().sendCommandTree(player);
         new Message("Successfully created faction").send(player, false);
         return 1;
