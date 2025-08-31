@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class ServerPlayerInteractionManagerMixin {
     @Redirect(method = "interactBlock", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;useOnBlock(Lnet/minecraft/item/ItemUsageContext;)Lnet/minecraft/util/ActionResult;"))
     public ActionResult place(ItemStack instance, ItemUsageContext context) {
+        System.out.println("ZIZI");
         if (PlayerEvents.PLACE_BLOCK.invoker().onPlaceBlock(context) == ActionResult.FAIL) {
             return ActionResult.FAIL;
         }

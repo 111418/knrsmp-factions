@@ -24,6 +24,12 @@ public class CreateCommand implements Command {
         ServerCommandSource source = context.getSource();
         ServerPlayerEntity player = source.getPlayer();
 
+        // faction name validation (only lowercase letters, numbers, and underscores)
+        if (!name.matches("[a-zA-Z0-9_]+")) {
+            new Message("Cannot create a faction with this name as it contains invalid characters").fail().send(player, false);
+            return 0;
+        }
+
         if (FactionsMod.CONFIG.DISPLAY.NAME_BLACKLIST.contains(name.toLowerCase(Locale.ROOT))) {
             new Message("Cannot create a faction with this name as it is on the blacklist").fail().send(player, false);
             return 0;

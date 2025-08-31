@@ -55,7 +55,9 @@ public class InteractionManager {
 
     private static ActionResult onUseBlock(PlayerEntity player, World world, Hand hand, BlockHitResult hitResult) {
         ItemStack stack = player.getStackInHand(hand);
-
+        /*
+        * TODO: HANDLE HERE
+        * */
         BlockPos hitPos = hitResult.getBlockPos();
         if (checkPermissions(player, hitPos, world, Permissions.USE_BLOCKS) == ActionResult.FAIL) {
             InteractionsUtil.warn(player, "use blocks");
